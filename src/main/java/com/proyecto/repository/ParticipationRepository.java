@@ -24,19 +24,19 @@ public interface ParticipationRepository extends JpaRepository<Participation, Lo
     );
 
     // Suma total de horas de un usuario en todos sus proyectos
-@Query("SELECT COALESCE(SUM(p.hoursLogged), 0) FROM Participation p " +
-       "WHERE p.user.id = :userId")
-Double sumAllHoursByUser(@Param("userId") Long userId);
+    @Query("SELECT COALESCE(SUM(p.hoursLogged), 0) FROM Participation p " +
+           "WHERE p.user.id = :userId")
+    Double sumAllHoursByUser(@Param("userId") Long userId);
 
-// Horas por método de registro (MANUAL vs QR)
-@Query("SELECT p.registrationMethod, COALESCE(SUM(p.hoursLogged), 0) " +
-       "FROM Participation p " +
-       "WHERE p.user.id = :userId AND p.project.id = :projectId " +
-       "GROUP BY p.registrationMethod")
-List<Object[]> sumHoursByMethodAndUserAndProject(
-        @Param("userId") Long userId,
-        @Param("projectId") Long projectId
-);
+    // Horas por método de registro (MANUAL vs QR)
+    @Query("SELECT p.registrationMethod, COALESCE(SUM(p.hoursLogged), 0) " +
+           "FROM Participation p " +
+           "WHERE p.user.id = :userId AND p.project.id = :projectId " +
+           "GROUP BY p.registrationMethod")
+    List<Object[]> sumHoursByMethodAndUserAndProject(
+            @Param("userId") Long userId,
+            @Param("projectId") Long projectId
+    );
 
     // Verificar solapamiento de horarios
     @Query("SELECT COUNT(p) > 0 FROM Participation p " +
@@ -50,15 +50,15 @@ List<Object[]> sumHoursByMethodAndUserAndProject(
     );
 
     // Buscar asistencia abierta (sin checkOut) de un usuario en un proyecto
-@Query("SELECT p FROM Participation p " +
-       "WHERE p.user.id = :userId " +
-       "AND p.project.id = :projectId " +
-       "AND p.checkOut IS NULL " +
-       "ORDER BY p.checkIn DESC")
-Optional<Participation> findOpenByUserAndProject(
-        @Param("userId") Long userId,
-        @Param("projectId") Long projectId
-);
+    @Query("SELECT p FROM Participation p " +
+           "WHERE p.user.id = :userId " +
+           "AND p.project.id = :projectId " +
+           "AND p.checkOut IS NULL " +
+           "ORDER BY p.checkIn DESC")
+    Optional<Participation> findOpenByUserAndProject(
+            @Param("userId") Long userId,
+            @Param("projectId") Long projectId
+    );
 
     // Filtrado avanzado de registros
     @Query("SELECT p FROM Participation p " +
@@ -88,4 +88,18 @@ Optional<Participation> findOpenByUserAndProject(
     @Query("SELECT COUNT(p) FROM Participation p " +
            "WHERE p.user.id = :userId AND p.user.active = false")
     Long countByInactiveUser(@Param("userId") Long userId);
+
+    // PR42/PR43 — Verificar si ya existe asistencia del usuario
+    // en el mismo proyecto en el mismo día
+    @Query("SELECT COUNT(p) > 0 FROM Participation p " +
+           "WHERE p.user.id = :userId " +
+           "AND p.project.id = :projectId " +
+           "AND p.checkIn >= :inicioDia " +
+           "AND p.checkIn <= :finDia")
+    Boolean existsByUserAndProjectAndDate(
+            @Param("userId") Long userId,
+            @Param("projectId") Long projectId,
+            @Param("inicioDia") LocalDateTime inicioDia,
+            @Param("finDia") LocalDateTime finDia
+    );
 }

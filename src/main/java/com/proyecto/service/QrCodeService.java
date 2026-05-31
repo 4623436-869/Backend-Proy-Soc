@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.EnumMap;
@@ -102,13 +103,24 @@ public class QrCodeService {
                 .orElseThrow(() -> new RuntimeException(
                     "QR inválido, expirado o ya utilizado"));
 
+        Long userId = qrCode.getUser().getId();
+        Long projectId = qrCode.getProject().getId();
         LocalDateTime checkIn = LocalDateTime.now();
-        LocalDateTime checkOut = checkIn.plusMinutes(1);
 
-        if (participationRepository.existsOverlap(
-                qrCode.getUser().getId(), checkIn, checkOut)) {
+        // PR42/PR43 — Verificar si el usuario ya tiene asistencia
+        // registrada hoy en el mismo proyecto
+        LocalDateTime inicioDia = LocalDate.now().atStartOfDay();
+        LocalDateTime finDia = LocalDate.now().atTime(23, 59, 59);
+
+        boolean yaRegistradoHoy = participationRepository
+                .existsByUserAndProjectAndDate(userId, projectId, inicioDia, finDia);
+
+        if (yaRegistradoHoy) {
+            log.warn("Intento de escaneo duplicado: user={} project={} fecha={}",
+                    userId, projectId, LocalDate.now());
             throw new RuntimeException(
-                "El usuario ya tiene una asistencia activa en este momento");
+                "El usuario ya tiene una asistencia registrada hoy en este proyecto. " +
+                "No se puede registrar un duplicado.");
         }
 
         Participation participation = Participation.builder()
@@ -127,13 +139,13 @@ public class QrCodeService {
         qrCodeRepository.save(qrCode);
 
         log.info("Asistencia QR registrada: user={} project={} checkIn={}",
-                qrCode.getUser().getId(), qrCode.getProject().getId(), checkIn);
+                userId, projectId, checkIn);
 
         return QrValidateResponse.builder()
                 .valid(true)
-                .userId(qrCode.getUser().getId())
+                .userId(userId)
                 .userFullName(qrCode.getUser().getFullName())
-                .projectId(qrCode.getProject().getId())
+                .projectId(projectId)
                 .projectName(qrCode.getProject().getName())
                 .scannedAt(checkIn)
                 .message("Asistencia registrada correctamente")

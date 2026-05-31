@@ -95,6 +95,16 @@ public class AuthService {
         return response;
     }
 
+    @Transactional
+    public void logout(String token) {
+        // PR74 — Busca la sesión activa y la desactiva en BD
+        sessionRepository.findByTokenAndActiveTrue(token)
+                .ifPresent(session -> {
+                    session.setActive(false);
+                    sessionRepository.save(session);
+                });
+    }
+
     private AuthResponse buildAuthResponse(User user, Role role) {
         String token = jwtService.generateToken(
                 user.getEmail(),

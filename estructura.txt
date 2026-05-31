@@ -1,0 +1,273 @@
+Listado de rutas de carpetas
+El número de serie del volumen es 7CE0-B6E9
+C:.
+|   .gitattributes
+|   .gitignore
+|   DOD.md
+|   ENDPOINTS.md
+|   estructura.txt
+|   HELP.md
+|   mvnw
+|   mvnw.cmd
+|   pom.xml
+|   
++---.mvn
+|   \---wrapper
+|           maven-wrapper.properties
+|           
++---.vscode
+|       settings.json
+|       
++---src
+|   +---main
+|   |   +---java
+|   |   |   \---com
+|   |   |       \---proyecto
+|   |   |           |   ProyectoApplication.java
+|   |   |           |   
+|   |   |           +---config
+|   |   |           |       DataSeeder.java
+|   |   |           |       SecurityConfig.java
+|   |   |           |       
+|   |   |           +---controller
+|   |   |           |       AttendanceController.java
+|   |   |           |       AuthController.java
+|   |   |           |       BeneficiaryController.java
+|   |   |           |       HoursController.java
+|   |   |           |       ProjectController.java
+|   |   |           |       QrCodeController.java
+|   |   |           |       UserController.java
+|   |   |           |       
+|   |   |           +---dto
+|   |   |           |   +---attendance
+|   |   |           |   |       AttendanceFilterRequest.java
+|   |   |           |   |       AttendanceRequest.java
+|   |   |           |   |       AttendanceResponse.java
+|   |   |           |   |       AttendanceSummaryResponse.java
+|   |   |           |   |       
+|   |   |           |   +---auth
+|   |   |           |   |       AuthResponse.java
+|   |   |           |   |       LoginRequest.java
+|   |   |           |   |       ProjectRequest.java
+|   |   |           |   |       RegisterRequest.java
+|   |   |           |   |       
+|   |   |           |   +---beneficiary
+|   |   |           |   |       BeneficiaryRequest.java
+|   |   |           |   |       BeneficiaryResponse.java
+|   |   |           |   |       
+|   |   |           |   +---project
+|   |   |           |   |       ProjectRequest.java
+|   |   |           |   |       ProjectResponse.java
+|   |   |           |   |       
+|   |   |           |   +---qr
+|   |   |           |   |       QrCheckOutRequest.java
+|   |   |           |   |       QrGenerateResponse.java
+|   |   |           |   |       QrScanRequest.java
+|   |   |           |   |       QrValidateResponse.java
+|   |   |           |   |       
+|   |   |           |   \---user
+|   |   |           |           UserResponse.java
+|   |   |           |           
+|   |   |           +---entity
+|   |   |           |       Beneficiary.java
+|   |   |           |       Participation.java
+|   |   |           |       Project.java
+|   |   |           |       QrCode.java
+|   |   |           |       Role.java
+|   |   |           |       Session.java
+|   |   |           |       User.java
+|   |   |           |       
+|   |   |           +---exception
+|   |   |           |       GlobalExceptionHandler.java
+|   |   |           |       
+|   |   |           +---repository
+|   |   |           |       BeneficiaryRepository.java
+|   |   |           |       ParticipationRepository.java
+|   |   |           |       ProjectRepository.java
+|   |   |           |       QrCodeRepository.java
+|   |   |           |       RoleRepository.java
+|   |   |           |       SessionRepository.java
+|   |   |           |       UserRepository.java
+|   |   |           |       
+|   |   |           +---security
+|   |   |           |       JwtAuthFilter.java
+|   |   |           |       JwtService.java
+|   |   |           |       UserDetailsServiceImpl.java
+|   |   |           |       
+|   |   |           +---service
+|   |   |           |       AttendanceService.java
+|   |   |           |       AuthService.java
+|   |   |           |       BeneficiaryService.java
+|   |   |           |       HoursCalculatorService.java
+|   |   |           |       ProjectService.java
+|   |   |           |       QrCodeService.java
+|   |   |           |       UserService.java
+|   |   |           |       
+|   |   |           \---validation
+|   |   |                   DateRangeValidator.java
+|   |   |                   NotPastDate.java
+|   |   |                   ValidDateRange.java
+|   |   |                   
+|   |   \---resources
+|   |           application.properties
+|   |           
+|   \---test
+|       \---java
+|           \---com
+|               \---proyecto
+|                       ApplicationTests.java
+|                       AttendanceHoursTest.java
+|                       AttendanceIntegrationTest.java
+|                       FinalQaSuiteTest.java
+|                       PermissionMatrixTest.java
+|                       QrCodeServiceTest.java
+|                       QrConcurrencyTest.java
+|                       
+\---target
+    +---classes
+    |   |   application.properties
+    |   |   
+    |   \---com
+    |       \---proyecto
+    |           |   ProyectoApplication.class
+    |           |   
+    |           +---config
+    |           |       DataSeeder.class
+    |           |       SecurityConfig.class
+    |           |       
+    |           +---controller
+    |           |       AttendanceController.class
+    |           |       AuthController.class
+    |           |       BeneficiaryController.class
+    |           |       HoursController.class
+    |           |       ProjectController.class
+    |           |       QrCodeController.class
+    |           |       UserController.class
+    |           |       
+    |           +---dto
+    |           |   +---attendance
+    |           |   |       AttendanceFilterRequest.class
+    |           |   |       AttendanceRequest.class
+    |           |   |       AttendanceResponse.class
+    |           |   |       AttendanceSummaryResponse$Builder.class
+    |           |   |       AttendanceSummaryResponse.class
+    |           |   |       
+    |           |   +---auth
+    |           |   |       AuthResponse$AuthResponseBuilder.class
+    |           |   |       AuthResponse.class
+    |           |   |       LoginRequest.class
+    |           |   |       ProjectRequest.class
+    |           |   |       RegisterRequest.class
+    |           |   |       
+    |           |   +---beneficiary
+    |           |   |       BeneficiaryRequest.class
+    |           |   |       BeneficiaryResponse.class
+    |           |   |       
+    |           |   +---project
+    |           |   |       ProjectRequest.class
+    |           |   |       ProjectResponse.class
+    |           |   |       
+    |           |   +---qr
+    |           |   |       QrCheckOutRequest.class
+    |           |   |       QrGenerateResponse$Builder.class
+    |           |   |       QrGenerateResponse.class
+    |           |   |       QrScanRequest.class
+    |           |   |       QrValidateResponse$Builder.class
+    |           |   |       QrValidateResponse.class
+    |           |   |       
+    |           |   \---user
+    |           |           UserResponse.class
+    |           |           
+    |           +---entity
+    |           |       Beneficiary$BeneficiaryBuilder.class
+    |           |       Beneficiary$BeneficiaryStatus.class
+    |           |       Beneficiary.class
+    |           |       Participation$ParticipationBuilder.class
+    |           |       Participation$RegistrationMethod.class
+    |           |       Participation.class
+    |           |       Project$ProjectBuilder.class
+    |           |       Project$ProjectStatus.class
+    |           |       Project.class
+    |           |       QrCode$QrCodeBuilder.class
+    |           |       QrCode.class
+    |           |       Role$RoleName.class
+    |           |       Role.class
+    |           |       Session$SessionBuilder.class
+    |           |       Session.class
+    |           |       User$UserBuilder.class
+    |           |       User.class
+    |           |       
+    |           +---exception
+    |           |       GlobalExceptionHandler.class
+    |           |       
+    |           +---repository
+    |           |       BeneficiaryRepository.class
+    |           |       ParticipationRepository.class
+    |           |       ProjectRepository.class
+    |           |       QrCodeRepository.class
+    |           |       RoleRepository.class
+    |           |       SessionRepository.class
+    |           |       UserRepository.class
+    |           |       
+    |           +---security
+    |           |       JwtAuthFilter.class
+    |           |       JwtService.class
+    |           |       UserDetailsServiceImpl.class
+    |           |       
+    |           +---service
+    |           |       AttendanceService.class
+    |           |       AuthService.class
+    |           |       BeneficiaryService.class
+    |           |       HoursCalculatorService.class
+    |           |       ProjectService.class
+    |           |       QrCodeService.class
+    |           |       UserService.class
+    |           |       
+    |           \---validation
+    |                   DateRangeValidator.class
+    |                   NotPastDate.class
+    |                   ValidDateRange.class
+    |                   
+    +---generated-sources
+    |   \---annotations
+    +---generated-test-sources
+    |   \---test-annotations
+    +---maven-status
+    |   \---maven-compiler-plugin
+    |       +---compile
+    |       |   \---default-compile
+    |       |           createdFiles.lst
+    |       |           inputFiles.lst
+    |       |           
+    |       \---testCompile
+    |           \---default-testCompile
+    |                   createdFiles.lst
+    |                   inputFiles.lst
+    |                   
+    +---surefire-reports
+    |       com.proyecto.ApplicationTests.txt
+    |       com.proyecto.AttendanceHoursTest.txt
+    |       com.proyecto.AttendanceIntegrationTest.txt
+    |       com.proyecto.FinalQaSuiteTest.txt
+    |       com.proyecto.PermissionMatrixTest.txt
+    |       com.proyecto.QrCodeServiceTest.txt
+    |       com.proyecto.QrConcurrencyTest.txt
+    |       TEST-com.proyecto.ApplicationTests.xml
+    |       TEST-com.proyecto.AttendanceHoursTest.xml
+    |       TEST-com.proyecto.AttendanceIntegrationTest.xml
+    |       TEST-com.proyecto.FinalQaSuiteTest.xml
+    |       TEST-com.proyecto.PermissionMatrixTest.xml
+    |       TEST-com.proyecto.QrCodeServiceTest.xml
+    |       TEST-com.proyecto.QrConcurrencyTest.xml
+    |       
+    \---test-classes
+        \---com
+            \---proyecto
+                    ApplicationTests.class
+                    AttendanceHoursTest.class
+                    AttendanceIntegrationTest.class
+                    FinalQaSuiteTest.class
+                    PermissionMatrixTest.class
+                    QrCodeServiceTest.class
+                    QrConcurrencyTest.class
+                    

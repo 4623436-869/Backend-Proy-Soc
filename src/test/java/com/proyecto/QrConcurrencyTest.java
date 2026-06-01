@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -57,7 +57,7 @@ class QrConcurrencyTest {
                     Project p = Project.builder()
                             .name("Proyecto Concurrencia")
                             .status(Project.ProjectStatus.ACTIVO)
-                            .startDate(LocalDate.now()).build();
+                            .startDate(LocalDateTime.now()).build();
                     return projectRepository.save(p);
                 });
     }

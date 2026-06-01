@@ -12,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
@@ -48,7 +47,7 @@ class QrCodeServiceTest {
         activeProject = Project.builder()
                 .id(1L).name("Proyecto Test")
                 .status(Project.ProjectStatus.ACTIVO)
-                .startDate(LocalDate.now()).build();
+                .startDate(LocalDateTime.now()).build();
     }
 
     @Test
@@ -113,7 +112,8 @@ class QrCodeServiceTest {
 
         when(qrCodeRepository.findValidToken(any(), any()))
                 .thenReturn(Optional.of(qrCode));
-        when(participationRepository.existsOverlap(any(), any(), any()))
+        when(participationRepository.existsByUserAndProjectAndDate(
+                any(), any(), any(), any()))
                 .thenReturn(false);
         when(participationRepository.save(any()))
                 .thenAnswer(inv -> inv.getArgument(0));

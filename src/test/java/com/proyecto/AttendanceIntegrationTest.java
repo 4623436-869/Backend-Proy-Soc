@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -57,7 +56,7 @@ class AttendanceIntegrationTest {
                     Project p = Project.builder()
                             .name("Proyecto Integration")
                             .status(Project.ProjectStatus.ACTIVO)
-                            .startDate(LocalDate.now())
+                            .startDate(LocalDateTime.now())
                             .build();
                     return projectRepository.save(p);
                 });

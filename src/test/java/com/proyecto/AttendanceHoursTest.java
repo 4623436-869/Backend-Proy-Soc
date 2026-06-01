@@ -13,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
@@ -52,12 +51,12 @@ class AttendanceHoursTest {
         activeProject = Project.builder()
                 .id(1L).name("Proyecto Activo")
                 .status(Project.ProjectStatus.ACTIVO)
-                .startDate(LocalDate.now()).build();
+                .startDate(LocalDateTime.now()).build();
 
         inactiveProject = Project.builder()
                 .id(2L).name("Proyecto Inactivo")
                 .status(Project.ProjectStatus.INACTIVO)
-                .startDate(LocalDate.now()).build();
+                .startDate(LocalDateTime.now()).build();
     }
 
     @Test

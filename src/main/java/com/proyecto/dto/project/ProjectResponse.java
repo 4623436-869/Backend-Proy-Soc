@@ -1,15 +1,15 @@
 package com.proyecto.dto.project;
 
 import com.proyecto.entity.Project;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ProjectResponse {
 
     private Long id;
     private String name;
     private String description;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
     private String status;
     private String coordinatorName;
     private String coordinatorEmail;
@@ -20,8 +20,8 @@ public class ProjectResponse {
     public Long getId() { return id; }
     public String getName() { return name; }
     public String getDescription() { return description; }
-    public LocalDate getStartDate() { return startDate; }
-    public LocalDate getEndDate() { return endDate; }
+    public LocalDateTime getStartDate() { return startDate; }
+    public LocalDateTime getEndDate() { return endDate; }
     public String getStatus() { return status; }
     public String getCoordinatorName() { return coordinatorName; }
     public String getCoordinatorEmail() { return coordinatorEmail; }
@@ -30,11 +30,11 @@ public class ProjectResponse {
     public void setId(Long id) { this.id = id; }
     public void setName(String name) { this.name = name; }
     public void setDescription(String description) { this.description = description; }
-    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
-    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
+    public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
+    public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
     public void setStatus(String status) { this.status = status; }
-    public void setCoordinatorName(String coordinatorName) { this.coordinatorName = coordinatorName; }
-    public void setCoordinatorEmail(String coordinatorEmail) { this.coordinatorEmail = coordinatorEmail; }
+    public void setCoordinatorName(String n) { this.coordinatorName = n; }
+    public void setCoordinatorEmail(String e) { this.coordinatorEmail = e; }
 
     public static ProjectResponse fromEntity(Project project) {
         ProjectResponse r = new ProjectResponse();

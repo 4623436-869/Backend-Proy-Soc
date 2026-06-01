@@ -1,11 +1,9 @@
 package com.proyecto.dto.project;
 
 import com.proyecto.entity.Project;
-import com.proyecto.validation.ValidDateRange;
 import jakarta.validation.constraints.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-@ValidDateRange(startField = "startDate", endField = "endDate")
 public class ProjectRequest {
 
     @NotBlank(message = "El nombre del proyecto es obligatorio")
@@ -16,9 +14,9 @@ public class ProjectRequest {
     private String description;
 
     @NotNull(message = "La fecha de inicio es obligatoria")
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     @NotNull(message = "El estado es obligatorio")
     private Project.ProjectStatus status;
@@ -29,15 +27,15 @@ public class ProjectRequest {
 
     public String getName() { return name; }
     public String getDescription() { return description; }
-    public LocalDate getStartDate() { return startDate; }
-    public LocalDate getEndDate() { return endDate; }
+    public LocalDateTime getStartDate() { return startDate; }
+    public LocalDateTime getEndDate() { return endDate; }
     public Project.ProjectStatus getStatus() { return status; }
     public Long getCoordinatorId() { return coordinatorId; }
 
     public void setName(String name) { this.name = name; }
-    public void setDescription(String description) { this.description = description; }
-    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
-    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
+    public void setDescription(String d) { this.description = d; }
+    public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
+    public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
     public void setStatus(Project.ProjectStatus status) { this.status = status; }
     public void setCoordinatorId(Long coordinatorId) { this.coordinatorId = coordinatorId; }
 }

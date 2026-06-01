@@ -77,6 +77,8 @@ public class ProjectService {
             User coordinator = userRepository.findById(request.getCoordinatorId())
                     .orElseThrow(() -> new RuntimeException("Coordinador no encontrado"));
             project.setCoordinator(coordinator);
+        } else {
+            project.setCoordinator(null);
         }
 
         return ProjectResponse.fromEntity(projectRepository.save(project));

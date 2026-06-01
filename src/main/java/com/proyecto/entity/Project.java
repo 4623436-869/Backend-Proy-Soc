@@ -1,7 +1,7 @@
 package com.proyecto.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "projects")
@@ -18,9 +18,9 @@ public class Project {
     private String description;
 
     @Column(nullable = false)
-    private LocalDate startDate;
+    private LocalDateTime startDate;
 
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 30)
@@ -38,8 +38,8 @@ public class Project {
     public Long getId() { return id; }
     public String getName() { return name; }
     public String getDescription() { return description; }
-    public LocalDate getStartDate() { return startDate; }
-    public LocalDate getEndDate() { return endDate; }
+    public LocalDateTime getStartDate() { return startDate; }
+    public LocalDateTime getEndDate() { return endDate; }
     public ProjectStatus getStatus() { return status; }
     public User getCoordinator() { return coordinator; }
 
@@ -47,8 +47,8 @@ public class Project {
     public void setId(Long id) { this.id = id; }
     public void setName(String name) { this.name = name; }
     public void setDescription(String description) { this.description = description; }
-    public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
-    public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
+    public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
+    public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
     public void setStatus(ProjectStatus status) { this.status = status; }
     public void setCoordinator(User coordinator) { this.coordinator = coordinator; }
 
@@ -59,25 +59,28 @@ public class Project {
         private Long id;
         private String name;
         private String description;
-        private LocalDate startDate;
-        private LocalDate endDate;
+        private LocalDateTime startDate;
+        private LocalDateTime endDate;
         private ProjectStatus status;
         private User coordinator;
 
         public ProjectBuilder id(Long id) { this.id = id; return this; }
         public ProjectBuilder name(String name) { this.name = name; return this; }
         public ProjectBuilder description(String d) { this.description = d; return this; }
-        public ProjectBuilder startDate(LocalDate d) { this.startDate = d; return this; }
-        public ProjectBuilder endDate(LocalDate d) { this.endDate = d; return this; }
+        public ProjectBuilder startDate(LocalDateTime d) { this.startDate = d; return this; }
+        public ProjectBuilder endDate(LocalDateTime d) { this.endDate = d; return this; }
         public ProjectBuilder status(ProjectStatus s) { this.status = s; return this; }
         public ProjectBuilder coordinator(User u) { this.coordinator = u; return this; }
 
         public Project build() {
             Project p = new Project();
-            p.id = this.id; p.name = this.name;
+            p.id = this.id;
+            p.name = this.name;
             p.description = this.description;
-            p.startDate = this.startDate; p.endDate = this.endDate;
-            p.status = this.status; p.coordinator = this.coordinator;
+            p.startDate = this.startDate;
+            p.endDate = this.endDate;
+            p.status = this.status;
+            p.coordinator = this.coordinator;
             return p;
         }
     }

@@ -85,6 +85,15 @@ public class DocumentService {
     }
 
     @Transactional(readOnly = true)
+    public List<DocumentResponse> search(String cicloAcademico, String facultad,
+                                          String escuela, String nombre, Document.DocumentType tipo) {
+        return documentRepository.findByFilters(cicloAcademico, facultad, escuela, nombre, tipo)
+                .stream()
+                .map(DocumentResponse::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public InputStream getFileStream(Long id) {
         Document document = findOrThrow(id);
         try {

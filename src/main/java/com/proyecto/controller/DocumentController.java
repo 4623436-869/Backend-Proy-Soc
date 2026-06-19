@@ -54,6 +54,18 @@ public class DocumentController {
         return ResponseEntity.ok(documentService.getAll());
     }
 
+    @GetMapping("/search")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<List<DocumentResponse>> search(
+            @RequestParam(required = false) String cicloAcademico,
+            @RequestParam(required = false) String facultad,
+            @RequestParam(required = false) String escuela,
+            @RequestParam(required = false) String nombre,
+            @RequestParam(required = false) Document.DocumentType tipo) {
+        return ResponseEntity.ok(
+                documentService.search(cicloAcademico, facultad, escuela, nombre, tipo));
+    }
+
     @GetMapping("/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<DocumentResponse> getById(@PathVariable Long id) {

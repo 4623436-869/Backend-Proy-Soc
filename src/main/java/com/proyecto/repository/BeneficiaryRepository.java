@@ -22,4 +22,8 @@ public interface BeneficiaryRepository extends JpaRepository<Beneficiary, Long> 
             @Param("name") String name,
             @Param("status") Beneficiary.BeneficiaryStatus status
     );
+
+    @Query("SELECT b.project.campus, COUNT(b) FROM Beneficiary b " +
+           "WHERE b.project.campus IS NOT NULL GROUP BY b.project.campus")
+    List<Object[]> countByCampus();
 }

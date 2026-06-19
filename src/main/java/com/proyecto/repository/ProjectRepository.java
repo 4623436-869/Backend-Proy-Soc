@@ -20,4 +20,10 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
             @Param("name") String name,
             @Param("status") Project.ProjectStatus status
     );
+
+    Long countByStatus(Project.ProjectStatus status);
+
+    @Query("SELECT p.campus, COUNT(p) FROM Project p " +
+           "WHERE p.campus IS NOT NULL GROUP BY p.campus")
+    List<Object[]> countByCampus();
 }

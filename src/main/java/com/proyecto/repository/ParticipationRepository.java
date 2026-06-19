@@ -111,4 +111,13 @@ public interface ParticipationRepository extends JpaRepository<Participation, Lo
             @Param("inicioDia") LocalDateTime inicioDia,
             @Param("finDia") LocalDateTime finDia
     );
+    // Total de horas registradas en todo el sistema
+    @Query("SELECT COALESCE(SUM(p.hoursLogged), 0) FROM Participation p")
+    Double sumAllHoursSystem();
+
+    // Total de horas agrupadas por campus del proyecto
+    @Query("SELECT p.project.campus, COALESCE(SUM(p.hoursLogged), 0) " +
+           "FROM Participation p WHERE p.project.campus IS NOT NULL " +
+           "GROUP BY p.project.campus")
+    List<Object[]> sumHoursByCampus();
 }

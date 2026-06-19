@@ -31,6 +31,8 @@ public class ProjectService {
                 .startDate(request.getStartDate())
                 .endDate(request.getEndDate())
                 .status(request.getStatus())
+                .cicloAcademico(request.getCicloAcademico())
+                .campus(request.getCampus())
                 .build();
 
         if (request.getCoordinatorId() != null) {
@@ -72,6 +74,8 @@ public class ProjectService {
         project.setStartDate(request.getStartDate());
         project.setEndDate(request.getEndDate());
         project.setStatus(request.getStatus());
+        project.setCicloAcademico(request.getCicloAcademico());
+        project.setCampus(request.getCampus());
 
         if (request.getCoordinatorId() != null) {
             User coordinator = userRepository.findById(request.getCoordinatorId())

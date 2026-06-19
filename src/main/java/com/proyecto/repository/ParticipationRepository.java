@@ -89,6 +89,15 @@ public interface ParticipationRepository extends JpaRepository<Participation, Lo
            "WHERE p.user.id = :userId AND p.user.active = false")
     Long countByInactiveUser(@Param("userId") Long userId);
 
+// Horas de un usuario agrupadas por proyecto y ciclo académico
+    @Query("SELECT p.project.id, p.project.name, p.project.cicloAcademico, " +
+           "COALESCE(SUM(p.hoursLogged), 0) " +
+           "FROM Participation p " +
+           "WHERE p.user.id = :userId " +
+           "GROUP BY p.project.id, p.project.name, p.project.cicloAcademico " +
+           "ORDER BY p.project.cicloAcademico DESC")
+    List<Object[]> findHoursByUserGroupedByProjectAndCiclo(@Param("userId") Long userId);
+
     // PR42/PR43 — Verificar si ya existe asistencia del usuario
     // en el mismo proyecto en el mismo día
     @Query("SELECT COUNT(p) > 0 FROM Participation p " +

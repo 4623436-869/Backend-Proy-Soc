@@ -11,6 +11,7 @@ public class ProjectResponse {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private String status;
+    private String cicloAcademico;
     private String coordinatorName;
     private String coordinatorEmail;
 
@@ -23,6 +24,7 @@ public class ProjectResponse {
     public LocalDateTime getStartDate() { return startDate; }
     public LocalDateTime getEndDate() { return endDate; }
     public String getStatus() { return status; }
+    public String getCicloAcademico() { return cicloAcademico; }
     public String getCoordinatorName() { return coordinatorName; }
     public String getCoordinatorEmail() { return coordinatorEmail; }
 
@@ -33,6 +35,7 @@ public class ProjectResponse {
     public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
     public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
     public void setStatus(String status) { this.status = status; }
+    public void setCicloAcademico(String cicloAcademico) { this.cicloAcademico = cicloAcademico; }
     public void setCoordinatorName(String n) { this.coordinatorName = n; }
     public void setCoordinatorEmail(String e) { this.coordinatorEmail = e; }
 
@@ -44,6 +47,7 @@ public class ProjectResponse {
         r.startDate = project.getStartDate();
         r.endDate = project.getEndDate();
         r.status = project.getStatus().name();
+        r.cicloAcademico = project.getCicloAcademico();
         r.coordinatorName = project.getCoordinator() != null
                 ? project.getCoordinator().getFullName() : null;
         r.coordinatorEmail = project.getCoordinator() != null

@@ -180,6 +180,36 @@ public class AttendanceService {
         participationRepository.deleteById(id);
     }
 
+@Transactional(readOnly = true)
+    public StudentHoursSummaryResponse getStudentHoursSummary(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        List<Object[]> rows = participationRepository
+                .findHoursByUserGroupedByProjectAndCiclo(userId);
+
+        List<StudentHoursSummaryResponse.ProjectCycleHours> details = rows.stream()
+                .map(row -> new StudentHoursSummaryResponse.ProjectCycleHours(
+                        ((Number) row[0]).longValue(),
+                        (String) row[1],
+                        (String) row[2],
+                        ((Number) row[3]).doubleValue()
+                ))
+                .collect(Collectors.toList());
+
+        double total = details.stream()
+                .mapToDouble(StudentHoursSummaryResponse.ProjectCycleHours::getHours)
+                .sum();
+
+        return StudentHoursSummaryResponse.builder()
+                .userId(user.getId())
+                .fullName(user.getFullName())
+                .codigoEstudiante(user.getCodigoEstudiante())
+                .totalHoursAllCycles(Math.round(total * 100.0) / 100.0)
+                .details(details)
+                .build();
+    }
+
     // ─── helpers ─────────────────────────────────────────────────────────────
 
     private Participation findOrThrow(Long id) {

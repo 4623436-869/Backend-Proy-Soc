@@ -23,6 +23,9 @@ public class User {
     @Column(nullable = false)
     private Boolean active = true;
 
+    @Column(name = "codigo_estudiante", unique = true, length = 30)
+    private String codigoEstudiante;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "user_roles",
@@ -49,6 +52,7 @@ public class User {
     public String getPassword() { return password; }
     public String getFullName() { return fullName; }
     public Boolean getActive() { return active; }
+    public String getCodigoEstudiante() { return codigoEstudiante; }
     public Set<Role> getRoles() { return roles; }
 
     // Setters
@@ -57,6 +61,7 @@ public class User {
     public void setPassword(String password) { this.password = password; }
     public void setFullName(String fullName) { this.fullName = fullName; }
     public void setActive(Boolean active) { this.active = active; }
+    public void setCodigoEstudiante(String codigoEstudiante) { this.codigoEstudiante = codigoEstudiante; }
     public void setRoles(Set<Role> roles) { this.roles = roles; }
 
     // Builder
@@ -68,6 +73,7 @@ public class User {
         private String password;
         private String fullName;
         private Boolean active = true;
+        private String codigoEstudiante;
         private Set<Role> roles;
 
         public UserBuilder id(Long id) { this.id = id; return this; }
@@ -75,6 +81,7 @@ public class User {
         public UserBuilder password(String password) { this.password = password; return this; }
         public UserBuilder fullName(String fullName) { this.fullName = fullName; return this; }
         public UserBuilder active(Boolean active) { this.active = active; return this; }
+        public UserBuilder codigoEstudiante(String codigoEstudiante) { this.codigoEstudiante = codigoEstudiante; return this; }
         public UserBuilder roles(Set<Role> roles) { this.roles = roles; return this; }
 
         public User build() {
@@ -84,6 +91,7 @@ public class User {
             u.password = this.password;
             u.fullName = this.fullName;
             u.active = this.active;
+            u.codigoEstudiante = this.codigoEstudiante;
             u.roles = this.roles;
             return u;
         }

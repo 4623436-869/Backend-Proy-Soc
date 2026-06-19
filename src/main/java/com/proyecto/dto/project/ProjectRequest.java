@@ -21,6 +21,10 @@ public class ProjectRequest {
     @NotNull(message = "El estado es obligatorio")
     private Project.ProjectStatus status;
 
+    @NotBlank(message = "El ciclo académico es obligatorio")
+    @Pattern(regexp = "^\\d{4}-[1-2]$", message = "El ciclo académico debe tener formato AAAA-N, ej: 2025-1")
+    private String cicloAcademico;
+
     private Long coordinatorId;
 
     public ProjectRequest() {}
@@ -30,6 +34,7 @@ public class ProjectRequest {
     public LocalDateTime getStartDate() { return startDate; }
     public LocalDateTime getEndDate() { return endDate; }
     public Project.ProjectStatus getStatus() { return status; }
+    public String getCicloAcademico() { return cicloAcademico; }
     public Long getCoordinatorId() { return coordinatorId; }
 
     public void setName(String name) { this.name = name; }
@@ -37,5 +42,6 @@ public class ProjectRequest {
     public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
     public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
     public void setStatus(Project.ProjectStatus status) { this.status = status; }
+    public void setCicloAcademico(String cicloAcademico) { this.cicloAcademico = cicloAcademico; }
     public void setCoordinatorId(Long coordinatorId) { this.coordinatorId = coordinatorId; }
 }

@@ -26,6 +26,9 @@ public class Project {
     @Column(nullable = false, length = 30)
     private ProjectStatus status;
 
+    @Column(name = "ciclo_academico", length = 20)
+    private String cicloAcademico;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "coordinator_id")
     private User coordinator;
@@ -41,6 +44,7 @@ public class Project {
     public LocalDateTime getStartDate() { return startDate; }
     public LocalDateTime getEndDate() { return endDate; }
     public ProjectStatus getStatus() { return status; }
+    public String getCicloAcademico() { return cicloAcademico; }
     public User getCoordinator() { return coordinator; }
 
     // Setters
@@ -50,6 +54,7 @@ public class Project {
     public void setStartDate(LocalDateTime startDate) { this.startDate = startDate; }
     public void setEndDate(LocalDateTime endDate) { this.endDate = endDate; }
     public void setStatus(ProjectStatus status) { this.status = status; }
+    public void setCicloAcademico(String cicloAcademico) { this.cicloAcademico = cicloAcademico; }
     public void setCoordinator(User coordinator) { this.coordinator = coordinator; }
 
     // Builder
@@ -62,6 +67,7 @@ public class Project {
         private LocalDateTime startDate;
         private LocalDateTime endDate;
         private ProjectStatus status;
+        private String cicloAcademico;
         private User coordinator;
 
         public ProjectBuilder id(Long id) { this.id = id; return this; }
@@ -70,6 +76,7 @@ public class Project {
         public ProjectBuilder startDate(LocalDateTime d) { this.startDate = d; return this; }
         public ProjectBuilder endDate(LocalDateTime d) { this.endDate = d; return this; }
         public ProjectBuilder status(ProjectStatus s) { this.status = s; return this; }
+        public ProjectBuilder cicloAcademico(String c) { this.cicloAcademico = c; return this; }
         public ProjectBuilder coordinator(User u) { this.coordinator = u; return this; }
 
         public Project build() {
@@ -80,6 +87,7 @@ public class Project {
             p.startDate = this.startDate;
             p.endDate = this.endDate;
             p.status = this.status;
+            p.cicloAcademico = this.cicloAcademico;
             p.coordinator = this.coordinator;
             return p;
         }

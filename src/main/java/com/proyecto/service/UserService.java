@@ -81,4 +81,32 @@ public class UserService {
             throw new RuntimeException("Error al actualizar el rol: " + e.getMessage());
         }
     }
+
+    @Transactional(readOnly = true)
+    public List<User> searchStudents(String query) {
+        if (query == null || query.trim().isEmpty()) {
+            throw new RuntimeException("Debe ingresar un código o apellido para buscar");
+        }
+        return userRepository.searchStudents(query.trim(), Role.RoleName.ROLE_ESTUDIANTE);
+    }
+
+    @Transactional
+    public User setCodigoEstudiante(Long userId, String codigoEstudiante) {
+        if (codigoEstudiante == null || codigoEstudiante.trim().isEmpty()) {
+            throw new RuntimeException("El código de estudiante no puede estar vacío");
+        }
+
+        String codigo = codigoEstudiante.trim();
+
+        userRepository.findByCodigoEstudiante(codigo).ifPresent(existing -> {
+            if (!existing.getId().equals(userId)) {
+                throw new RuntimeException(
+                    "El código '" + codigo + "' ya está asignado a otro usuario");
+            }
+        });
+
+        User user = getById(userId);
+        user.setCodigoEstudiante(codigo);
+        return userRepository.save(user);
+    }
 }

@@ -35,6 +35,16 @@ public class UserController {
         return ResponseEntity.ok(UserResponse.fromEntity(userService.getById(id)));
     }
 
+    @GetMapping("/search")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_COORDINADOR')")
+    public ResponseEntity<List<UserResponse>> searchStudents(
+            @RequestParam String query) {
+        return ResponseEntity.ok(
+            userService.searchStudents(query).stream()
+                    .map(UserResponse::fromEntity)
+                    .collect(Collectors.toList()));
+    }
+
     @PatchMapping("/{id}/toggle-active")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<UserResponse> toggleActive(@PathVariable Long id) {
@@ -49,5 +59,14 @@ public class UserController {
             @RequestParam Role.RoleName newRole) {
         return ResponseEntity.ok(
                 UserResponse.fromEntity(userService.changeRole(id, newRole)));
+    }
+
+    @PatchMapping("/{id}/codigo")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    public ResponseEntity<UserResponse> setCodigoEstudiante(
+            @PathVariable Long id,
+            @RequestParam String codigo) {
+        return ResponseEntity.ok(
+                UserResponse.fromEntity(userService.setCodigoEstudiante(id, codigo)));
     }
 }

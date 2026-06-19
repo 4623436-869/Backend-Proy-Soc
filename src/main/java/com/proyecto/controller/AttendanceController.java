@@ -43,6 +43,13 @@ public class AttendanceController {
         return ResponseEntity.ok(attendanceService.getByUser(userId));
     }
 
+@GetMapping("/student-summary/{userId}")
+    @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_COORDINADOR')")
+    public ResponseEntity<StudentHoursSummaryResponse> getStudentHoursSummary(
+            @PathVariable Long userId) {
+        return ResponseEntity.ok(attendanceService.getStudentHoursSummary(userId));
+    }
+
     @GetMapping("/project/{projectId}")
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_COORDINADOR')")
     public ResponseEntity<List<AttendanceResponse>> getByProject(

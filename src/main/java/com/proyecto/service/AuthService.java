@@ -38,10 +38,16 @@ public class AuthService {
         this.authenticationManager = authenticationManager;
     }
 
-    @Transactional
+   @Transactional
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("El email ya está registrado");
+        }
+
+        if (request.getCodigoEstudiante() != null
+                && !request.getCodigoEstudiante().trim().isEmpty()
+                && userRepository.existsByCodigoEstudiante(request.getCodigoEstudiante().trim())) {
+            throw new RuntimeException("El código de estudiante ya está registrado");
         }
 
         Role.RoleName roleName = Role.RoleName.ROLE_ESTUDIANTE;
@@ -59,6 +65,8 @@ public class AuthService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .active(true)
+                .codigoEstudiante(request.getCodigoEstudiante() != null
+                        ? request.getCodigoEstudiante().trim() : null)
                 .roles(Set.of(role))
                 .build();
 

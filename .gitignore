@@ -17,3 +17,6 @@ application-local.properties
 # OS
 .DS_Store
 Thumbs.db
+
+# Archivos subidos (PDFs de planes/informes) - no se versionan
+uploads/
